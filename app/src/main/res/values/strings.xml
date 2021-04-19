@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GeoTaggr</string>
+    <string name="login_success">Logged in as %1$s</string>
+    <string name="login_error">Unable to log you in at this time</string>
 </resources>
