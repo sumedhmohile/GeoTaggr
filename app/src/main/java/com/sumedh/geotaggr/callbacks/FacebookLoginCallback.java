@@ -30,7 +30,7 @@ public class FacebookLoginCallback implements FacebookCallback<LoginResult> {
         ProgressBarManager.showProgressBar("Logging in", fragmentManager);
 
         final String facebookId = loginResult.getAccessToken().getUserId();
-        LoginGraphRequestCallback loginGraphRequestCallback = new LoginGraphRequestCallback(context);
+        LoginGraphRequestCallback loginGraphRequestCallback = new LoginGraphRequestCallback(context, fragmentManager);
 
         new GraphRequest(
                 AccessToken.getCurrentAccessToken(),

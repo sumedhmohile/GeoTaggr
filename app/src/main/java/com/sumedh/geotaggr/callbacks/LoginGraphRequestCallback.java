@@ -15,18 +15,25 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.sumedh.geotaggr.Constants;
+import com.sumedh.geotaggr.MessagingService;
 import com.sumedh.geotaggr.ProgressBarManager;
 import com.sumedh.geotaggr.R;
+import com.sumedh.geotaggr.fragments.CustomMapFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import androidx.fragment.app.FragmentManager;
+
 public class LoginGraphRequestCallback implements GraphRequest.Callback {
     private final String TAG = "GraphRequestCallback";
     private Context context;
+    private FragmentManager fragmentManager;
 
-    public LoginGraphRequestCallback(Context context) {
+    public LoginGraphRequestCallback(Context context, FragmentManager fragmentManager) {
         this.context = context;
+        this.fragmentManager = fragmentManager;
+
     }
 
     @Override
@@ -56,7 +63,12 @@ public class LoginGraphRequestCallback implements GraphRequest.Callback {
 
                         Toast.makeText(context, String.format(context.getString(R.string.login_success), name), Toast.LENGTH_LONG).show();
 
-                        //TODO: navigate to next fragment
+                        MessagingService messagingService = new MessagingService();
+                        messagingService.refreshToken(context);
+
+                        fragmentManager.beginTransaction()
+                                .replace(R.id.fragment_container, CustomMapFragment.newInstance())
+                                .commit();
 
                     } catch (JSONException je) {
                         Log.e(TAG, je.toString());
@@ -90,7 +102,7 @@ public class LoginGraphRequestCallback implements GraphRequest.Callback {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putString(Constants.SERVER_FIELD_RESPONSE_TOKEN, token);
-        editor.putString(Constants.FACEBOOK_ID, facebookId);
+        editor.putString(Constants.SERVER_FIELD_FACEBOOK_ID, facebookId);
         editor.putString(Constants.SERVER_FIELD_NAME, name);
         editor.apply();
     }
