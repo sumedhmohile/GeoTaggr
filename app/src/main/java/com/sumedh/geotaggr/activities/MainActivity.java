@@ -1,10 +1,14 @@
 package com.sumedh.geotaggr.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.facebook.FacebookSdk;
+import com.sumedh.geotaggr.Constants;
+import com.sumedh.geotaggr.fragments.CustomMapFragment;
 import com.sumedh.geotaggr.fragments.LoginFragment;
 import com.sumedh.geotaggr.R;
 
@@ -15,10 +19,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LoginFragment loginFragment = LoginFragment.newInstance();
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(Constants.PREFERENCES, Context.MODE_PRIVATE);
+        Fragment nextFragment;
+
+        if("".equals(sharedPreferences.getString(Constants.SERVER_FIELD_FACEBOOK_ID, ""))) {
+            nextFragment = LoginFragment.newInstance();
+        }
+        else {
+            nextFragment = CustomMapFragment.newInstance();
+        }
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, loginFragment)
+                .replace(R.id.fragment_container, nextFragment)
                 .commit();
     }
 }
