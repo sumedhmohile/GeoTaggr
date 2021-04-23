@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.AddTagFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/add_tag_title_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="10dp"
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        android:text="Add New Tag"/>
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/add_tag_title_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="Tag Text"
+        android:id="@+id/tag_edit_text"
+        android:layout_margin="10dp"/>
+
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tag_edit_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/add_tag_autocomplete"
+        android:layout_margin="10dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/add_tag_autocomplete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/add_tag_map_image"
+        android:layout_margin="10dp"/>
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/add_tag_map_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:text="Add Tag"
+        android:textColor="#fff"
+        android:id="@+id/add_tag_button"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
