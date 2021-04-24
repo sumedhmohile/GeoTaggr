@@ -1,25 +1,29 @@
 package com.sumedh.geotaggr;
 
+import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.facebook.login.LoginManager;
+import com.google.android.gms.location.Geofence;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.sumedh.geotaggr.domain.Tag;
-import com.sumedh.geotaggr.fragments.CustomMapFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +31,9 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 
 public class TagResourceManager {
     private static final String TAG = "TagResourceManager";
@@ -72,6 +79,7 @@ public class TagResourceManager {
         if(context != null) {
             TagDatabase db = TagDatabase.getInstance(context);
             db.tagDao().Insert(tag);
+            addTagToGeofence(tag, context);
         }
     }
 
@@ -117,5 +125,50 @@ public class TagResourceManager {
             }};
 
         requestQueue.add(jsonObjectRequest);
+    }
+
+    private static void addTagToGeofence(Tag tag, Context context) {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(context, context.getResources().getString(R.string.location_permission_request), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        GeofencingClient geofencingClient = LocationServices.getGeofencingClient(context);
+
+        final Geofence geofence = new Geofence.Builder()
+                .setRequestId(tag.getTagId().toString())
+                .setCircularRegion(
+                        tag.getLatitude(),
+                        tag.getLongitude(),
+                        Constants.GEOFENCE_RADIUS_METRES
+                )
+                .setExpirationDuration(Constants.GEOFENCE_RADIUS_EXPIRY_MILLISECONDS)
+                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER |
+                        Geofence.GEOFENCE_TRANSITION_EXIT)
+                .build();
+
+        final GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
+        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
+        builder.addGeofence(geofence).build();
+
+        GeofencingRequest request = builder.build();
+
+        Intent intent = new Intent(context, GeofenceBroadcastListener.class);
+        PendingIntent geofencePendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.
+                FLAG_UPDATE_CURRENT);
+
+        geofencingClient.addGeofences(request, geofencePendingIntent).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.i(TAG, "Added geofence");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e(TAG, "Could not add geofence: " + e);
+                e.printStackTrace();
+            }
+        });
+
     }
 }

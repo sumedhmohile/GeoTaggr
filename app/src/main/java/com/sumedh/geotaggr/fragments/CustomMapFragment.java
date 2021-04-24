@@ -1,5 +1,9 @@
 package com.sumedh.geotaggr.fragments;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +16,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.sumedh.geotaggr.Constants;
 import com.sumedh.geotaggr.R;
 import com.sumedh.geotaggr.TagDatabase;
 import com.sumedh.geotaggr.TagResourceManager;
@@ -62,6 +67,7 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
 
+        createNotificationChannel();
         map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
             public void onMapLongClick(LatLng latLng) {
@@ -69,7 +75,6 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback {
                 addTagFragment.show(getChildFragmentManager(), "addTagFragment");
             }
         });
-
 
         TagDatabase tagDatabase = TagDatabase.getInstance(getContext());
 
@@ -88,6 +93,18 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback {
         });
 
         TagResourceManager.loadTagsToMap(map, getContext());
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = Constants.NOTIFICATION_CHANNEL;
+            String description = Constants.NOTIFICATION_CHANNEL_DESCRIPTION;
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(Constants.NOTIFICATION_CHANNEL, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 }
