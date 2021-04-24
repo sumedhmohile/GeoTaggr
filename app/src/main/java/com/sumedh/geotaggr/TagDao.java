@@ -24,4 +24,7 @@ public interface TagDao {
 
     @Query("SELECT * FROM tag")
     LiveData<List<Tag>> getAllTags();
+
+    @Query("SELECT * FROM tag WHERE tagId = (:id)")
+    Tag getTagById(Integer id);
 }
