@@ -22,7 +22,6 @@ public class Constants {
     public static final String SERVER_FIELD_SET_BY_NAME = "setByName";
     public static final String SERVER_FIELD_SET_BY_ID = "setById";
 
-
     public static final String NEW_TAG_COMMAND = "NEW_TAG";
 
     public static final String PREFERENCES = "GT_PREFERENCES";
@@ -36,6 +35,12 @@ public class Constants {
     public static final String STATIC_MAPS_COMMA = "%2C";
     public static final String STATIC_MAPS_PARENTHESES = "%5D%7D)/";
     public static final String STATIC_MAPS_SCALE = ",15/900x600?access_token=";
+
+    public static final int GEOFENCE_RADIUS_METRES = 100;
+    public static final int GEOFENCE_RADIUS_EXPIRY_MILLISECONDS = 7 * 24 * 60 * 60 * 1000;
+
+    public static final String NOTIFICATION_CHANNEL = "GEOTAGGR_APP_CHANEL";
+    public static final String NOTIFICATION_CHANNEL_DESCRIPTION = "Geotaggr notification channel";
 
 
 }
