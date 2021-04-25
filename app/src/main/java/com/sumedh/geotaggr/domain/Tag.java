@@ -9,6 +9,9 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "tag")
 public class Tag {
     @PrimaryKey
+    private Integer tagKey;
+
+    @ColumnInfo(name = "tagId")
     private Integer tagId;
 
     @ColumnInfo(name = "tagText")
@@ -81,6 +84,14 @@ public class Tag {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public Integer getTagKey() {
+        return tagKey;
+    }
+
+    public void setTagKey(Integer tagKey) {
+        this.tagKey = tagKey;
     }
 
     @Override
