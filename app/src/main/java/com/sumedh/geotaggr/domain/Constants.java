@@ -1,4 +1,4 @@
-package com.sumedh.geotaggr;
+package com.sumedh.geotaggr.domain;
 
 public class Constants {
     public static final String FACEBOOK_FRIENDS_PERMISSION = "user_friends";

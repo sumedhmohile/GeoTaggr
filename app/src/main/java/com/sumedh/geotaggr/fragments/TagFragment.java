@@ -3,7 +3,6 @@ package com.sumedh.geotaggr.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,15 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.squareup.picasso.Picasso;
-import com.sumedh.geotaggr.Constants;
-import com.sumedh.geotaggr.ProgressBarManager;
+import com.sumedh.geotaggr.domain.Constants;
+import com.sumedh.geotaggr.domain.ProgressBarManager;
 import com.sumedh.geotaggr.R;
-import com.sumedh.geotaggr.TagResourceManager;
+import com.sumedh.geotaggr.domain.TagResourceManager;
 
 public class TagFragment extends DialogFragment {
 

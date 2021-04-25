@@ -9,7 +9,7 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import com.facebook.login.widget.ProfilePictureView;
-import com.sumedh.geotaggr.FriendFilter;
+import com.sumedh.geotaggr.domain.FriendFilter;
 import com.sumedh.geotaggr.R;
 import com.sumedh.geotaggr.domain.User;
 

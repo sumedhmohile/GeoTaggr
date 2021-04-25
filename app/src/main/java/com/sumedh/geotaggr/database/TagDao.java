@@ -1,4 +1,4 @@
-package com.sumedh.geotaggr;
+package com.sumedh.geotaggr.database;
 
 import com.sumedh.geotaggr.domain.Tag;
 

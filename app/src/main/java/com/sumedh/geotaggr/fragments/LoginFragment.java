@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
-import com.sumedh.geotaggr.Constants;
+import com.sumedh.geotaggr.domain.Constants;
 import com.sumedh.geotaggr.R;
 import com.sumedh.geotaggr.callbacks.FacebookLoginCallback;
 

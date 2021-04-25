@@ -17,10 +17,10 @@ import com.facebook.HttpMethod;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
-import com.sumedh.geotaggr.Constants;
-import com.sumedh.geotaggr.DataProvider;
+import com.sumedh.geotaggr.domain.Constants;
+import com.sumedh.geotaggr.domain.DataProvider;
 import com.sumedh.geotaggr.R;
-import com.sumedh.geotaggr.TagResourceManager;
+import com.sumedh.geotaggr.domain.TagResourceManager;
 import com.sumedh.geotaggr.adapters.AutocompleteFriendAdapter;
 import com.sumedh.geotaggr.domain.User;
 
