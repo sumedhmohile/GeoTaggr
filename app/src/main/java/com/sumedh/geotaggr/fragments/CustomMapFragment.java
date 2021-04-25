@@ -2,7 +2,6 @@ package com.sumedh.geotaggr.fragments;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -76,19 +75,29 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        TagDatabase tagDatabase = TagDatabase.getInstance(getContext());
+        final TagDatabase tagDatabase = TagDatabase.getInstance(getContext());
 
         tagDatabase.tagDao().getAllTags().observe(this, new Observer<List<Tag>>() {
             @Override
             public void onChanged(List<Tag> tags) {
                 Log.i(TAG, "tag changed");
-
+                map.clear();
                 for(Tag tag : tags) {
                     Marker marker = map.addMarker(new MarkerOptions().position(new LatLng(tag.getLatitude(), tag.getLongitude())).title(tag.getTagText()));
                     marker.setTag(tag.getTagId());
                     marker.showInfoWindow();
                 }
+            }
+        });
 
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Tag tag = tagDatabase.tagDao().getTagById((Integer) marker.getTag());
+                TagFragment tagFragment = TagFragment.newInstance(tag.getTagText(), tag.getLatitude(), tag.getLongitude(), tag.getTagId());
+                tagFragment.show(getChildFragmentManager(), "tagFragment");
+
+                return true;
             }
         });
 

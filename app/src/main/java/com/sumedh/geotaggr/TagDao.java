@@ -27,4 +27,7 @@ public interface TagDao {
 
     @Query("SELECT * FROM tag WHERE tagId = (:id)")
     Tag getTagById(Integer id);
+
+    @Query("DELETE FROM tag WHERE tagId = (:id)")
+    void deleteTagById(Integer id);
 }
