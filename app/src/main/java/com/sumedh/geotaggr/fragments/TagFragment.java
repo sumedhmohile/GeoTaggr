@@ -53,6 +53,7 @@ public class TagFragment extends DialogFragment {
             latitude = getArguments().getDouble(Constants.LATITUDE);
             longitude = getArguments().getDouble(Constants.LONGITUDE);
             tagId = getArguments().getInt(Constants.SERVER_FIELD_TAG_ID);
+            setStyle(DialogFragment.STYLE_NO_FRAME, R.style.DialogTheme);
         }
     }
 
