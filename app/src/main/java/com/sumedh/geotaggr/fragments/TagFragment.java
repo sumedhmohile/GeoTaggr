@@ -37,7 +37,7 @@ public class TagFragment extends DialogFragment {
         Bundle args = new Bundle();
         args.putString(Constants.SERVER_FIELD_TAG_TEXT, tagText);
         args.putDouble(Constants.LATITUDE, latitude);
-        args.putDouble(Constants.LATITUDE, longitude);
+        args.putDouble(Constants.LONGITUDE, longitude);
         args.putInt(Constants.SERVER_FIELD_TAG_ID, tagId);
         fragment.setArguments(args);
         return fragment;
