@@ -27,14 +27,11 @@ public class Constants {
     public static final String PREFERENCES = "GT_PREFERENCES";
     public static final String PROGRESSBAR_MESSAGE = "message";
 
-    public static final String LATITUDE = "latitude";
-    public static final String LONGITUDE = "longitude";
-
-    public static final String STATIC_MAPS_URL = "https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/static/";
-    public static final String STATIC_MAPS_MARKER = "geojson(%7B%22type%22%3A%22Point%22%2C%22coordinates%22%3A%5B";
-    public static final String STATIC_MAPS_COMMA = "%2C";
-    public static final String STATIC_MAPS_PARENTHESES = "%5D%7D)/";
-    public static final String STATIC_MAPS_SCALE = ",15/900x600?access_token=";
+    public static final String STATIC_MAPS_URL = "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/";
+    public static final String STATIC_MAPS_MARKER = "pin-l+f90101(";
+//    public static final String STATIC_MAPS_MARKER = "pin-l+f90101(-122.3486,37.8169)";
+    public static final String STATIC_MAPS_PARENTHESES = ")/";
+    public static final String STATIC_MAPS_SCALE = ",17/900x600?access_token=";
 
     public static final int GEOFENCE_RADIUS_METRES = 100;
     public static final int GEOFENCE_RADIUS_EXPIRY_MILLISECONDS = 7 * 24 * 60 * 60 * 1000;
