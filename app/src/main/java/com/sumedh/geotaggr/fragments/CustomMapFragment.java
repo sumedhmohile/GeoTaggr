@@ -1,7 +1,10 @@
 package com.sumedh.geotaggr.fragments;
 
+import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,20 +12,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.sumedh.geotaggr.Constants;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.sumedh.geotaggr.domain.Constants;
 import com.sumedh.geotaggr.R;
-import com.sumedh.geotaggr.TagDatabase;
-import com.sumedh.geotaggr.TagResourceManager;
+import com.sumedh.geotaggr.database.TagDatabase;
+import com.sumedh.geotaggr.domain.TagResourceManager;
 import com.sumedh.geotaggr.domain.Tag;
 
 import java.util.List;
 
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
@@ -52,9 +59,9 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        if(getActivity() != null) {
+        if (getActivity() != null) {
             SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map_fragment);
-            if(mapFragment != null) {
+            if (mapFragment != null) {
                 mapFragment.getMapAsync(this);
             }
         }
@@ -74,6 +81,19 @@ public class CustomMapFragment extends Fragment implements OnMapReadyCallback {
                 addTagFragment.show(getChildFragmentManager(), "addTagFragment");
             }
         });
+
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            map.setMyLocationEnabled(true);
+            LocationServices.getFusedLocationProviderClient(getActivity()).getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if(location != null) {
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 16.0f));
+                    }
+                }
+            });
+        }
+
 
         final TagDatabase tagDatabase = TagDatabase.getInstance(getContext());
 

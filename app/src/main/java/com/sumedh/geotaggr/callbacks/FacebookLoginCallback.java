@@ -9,7 +9,7 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginResult;
-import com.sumedh.geotaggr.ProgressBarManager;
+import com.sumedh.geotaggr.domain.ProgressBarManager;
 
 import androidx.fragment.app.FragmentManager;
 

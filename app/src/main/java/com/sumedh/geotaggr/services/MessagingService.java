@@ -1,24 +1,26 @@
-package com.sumedh.geotaggr;
+package com.sumedh.geotaggr.services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.sumedh.geotaggr.domain.DataProvider;
+import com.sumedh.geotaggr.R;
+import com.sumedh.geotaggr.domain.Constants;
 import com.sumedh.geotaggr.domain.Tag;
+import com.sumedh.geotaggr.domain.TagResourceManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;

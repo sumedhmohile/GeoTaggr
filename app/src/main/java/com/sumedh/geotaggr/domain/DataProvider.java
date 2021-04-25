@@ -1,7 +1,9 @@
-package com.sumedh.geotaggr;
+package com.sumedh.geotaggr.domain;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.sumedh.geotaggr.domain.Constants;
 
 public class DataProvider {
     public static String getUserFacebookId(Context context) {

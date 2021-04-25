@@ -1,4 +1,4 @@
-package com.sumedh.geotaggr;
+package com.sumedh.geotaggr.domain;
 
 import android.util.Log;
 import android.widget.Filter;

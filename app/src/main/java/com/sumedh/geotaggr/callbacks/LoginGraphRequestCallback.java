@@ -14,9 +14,9 @@ import com.android.volley.toolbox.Volley;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
-import com.sumedh.geotaggr.Constants;
-import com.sumedh.geotaggr.MessagingService;
-import com.sumedh.geotaggr.ProgressBarManager;
+import com.sumedh.geotaggr.domain.Constants;
+import com.sumedh.geotaggr.services.MessagingService;
+import com.sumedh.geotaggr.domain.ProgressBarManager;
 import com.sumedh.geotaggr.R;
 import com.sumedh.geotaggr.fragments.CustomMapFragment;
 
@@ -50,8 +50,7 @@ public class LoginGraphRequestCallback implements GraphRequest.Callback {
             object.put(Constants.SERVER_FIELD_NAME, name);
             object.put(Constants.SERVER_FIELD_FACEBOOK_ID, facebookId);
 
-            //TODO: add actual token
-            object.put(Constants.SERVER_FIELD_FCM_TOKEN, "temp");
+            object.put(Constants.SERVER_FIELD_FCM_TOKEN, "dummy");
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, object, new Response.Listener<JSONObject>() {
                 @Override

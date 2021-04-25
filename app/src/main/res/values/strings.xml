@@ -4,4 +4,6 @@
     <string name="login_error">Unable to log you in at this time</string>
     <string name="location_permission_request">Please provide location permissions</string>
     <string name="notification_alert">New Tag Alert!</string>
+    <string name="app_title_login"><b><i>GeoTaggr</i></b></string>
+    <string name="app_description"><i>Set location triggered reminders for yourself and your friends!</i></string>
 </resources>

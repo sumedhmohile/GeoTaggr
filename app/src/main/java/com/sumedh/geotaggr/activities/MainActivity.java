@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.sumedh.geotaggr.Constants;
+import com.sumedh.geotaggr.domain.Constants;
 import com.sumedh.geotaggr.fragments.CustomMapFragment;
 import com.sumedh.geotaggr.fragments.LoginFragment;
 import com.sumedh.geotaggr.R;
