@@ -1,6 +1,7 @@
 package com.sumedh.geotaggr;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -83,9 +84,18 @@ public class TagResourceManager {
         }
     }
 
+    public static void clearTags(Context context) {
+        if(context != null) {
+            TagDatabase db = TagDatabase.getInstance(context);
+            db.tagDao().DeleteAllTags();
+        }
+    }
+
     public static void loadTagsToMap(final GoogleMap map, final Context context) {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         String url = context.getString(R.string.base_url) + Constants.ENDPOINT_TAG;
+
+        clearTags(context);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -169,6 +179,35 @@ public class TagResourceManager {
                 e.printStackTrace();
             }
         });
+    }
 
+    public static void deleteTagById(final Integer tagId, final Context context, final Dialog dialog) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        String url = context.getString(R.string.base_url) + Constants.ENDPOINT_TAG + "/" + tagId;
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                TagDatabase db = TagDatabase.getInstance(context);
+                db.tagDao().deleteTagById(tagId);
+                ProgressBarManager.dismissProgressBar();
+                dialog.dismiss();
+                Toast.makeText(context, "Deleted tag", Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, error.toString());
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> params = new HashMap<>();
+                params.put("Content-Type", "application/json; charset=UTF-8");
+                params.put("Authorization", DataProvider.getAuthToken(context));
+                return params;
+            }};
+
+        requestQueue.add(jsonObjectRequest);
     }
 }
