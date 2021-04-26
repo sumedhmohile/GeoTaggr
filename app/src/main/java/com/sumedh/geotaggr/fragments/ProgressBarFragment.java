@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.sumedh.geotaggr.Constants;
+import com.sumedh.geotaggr.domain.Constants;
 import com.sumedh.geotaggr.R;
 
 import java.util.Objects;

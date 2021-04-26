@@ -1,7 +1,8 @@
-package com.sumedh.geotaggr;
+package com.sumedh.geotaggr.domain;
 
 import android.os.Bundle;
 
+import com.sumedh.geotaggr.domain.Constants;
 import com.sumedh.geotaggr.fragments.ProgressBarFragment;
 
 import androidx.fragment.app.FragmentManager;

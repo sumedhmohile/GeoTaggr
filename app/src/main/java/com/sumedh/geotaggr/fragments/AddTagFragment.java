@@ -17,10 +17,10 @@ import com.facebook.HttpMethod;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
-import com.sumedh.geotaggr.Constants;
-import com.sumedh.geotaggr.DataProvider;
+import com.sumedh.geotaggr.domain.Constants;
+import com.sumedh.geotaggr.domain.DataProvider;
 import com.sumedh.geotaggr.R;
-import com.sumedh.geotaggr.TagResourceManager;
+import com.sumedh.geotaggr.domain.TagResourceManager;
 import com.sumedh.geotaggr.adapters.AutocompleteFriendAdapter;
 import com.sumedh.geotaggr.domain.User;
 
@@ -45,8 +45,8 @@ public class AddTagFragment extends DialogFragment {
     public static AddTagFragment newInstance(LatLng latLng) {
         AddTagFragment fragment = new AddTagFragment();
         Bundle args = new Bundle();
-        args.putDouble(Constants.LATITUDE, latLng.latitude);
-        args.putDouble(Constants.LONGITUDE, latLng.longitude);
+        args.putDouble(Constants.SERVER_FIELD_LATITUDE, latLng.latitude);
+        args.putDouble(Constants.SERVER_FIELD_LONGITUDE, latLng.longitude);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,7 +55,7 @@ public class AddTagFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            location = new LatLng(getArguments().getDouble(Constants.LATITUDE), getArguments().getDouble(Constants.LONGITUDE));
+            location = new LatLng(getArguments().getDouble(Constants.SERVER_FIELD_LATITUDE), getArguments().getDouble(Constants.SERVER_FIELD_LONGITUDE));
             setStyle(DialogFragment.STYLE_NO_FRAME, R.style.DialogTheme);
         }
     }
@@ -111,8 +111,9 @@ public class AddTagFragment extends DialogFragment {
 
     private String resolveStaticMapsUrl(LatLng latLng) {
         String result = latLng.longitude + "," + latLng.latitude;
-        result = Constants.STATIC_MAPS_URL +
-                Constants.STATIC_MAPS_MARKER + latLng.longitude + Constants.STATIC_MAPS_COMMA + latLng.latitude + Constants.STATIC_MAPS_PARENTHESES + result + Constants.STATIC_MAPS_SCALE + getResources().getString(R.string.static_maps_api_key);
+        result = Constants.STATIC_MAPS_URL + Constants.STATIC_MAPS_MARKER + result + Constants.STATIC_MAPS_PARENTHESES + result + Constants.STATIC_MAPS_SCALE + getResources().getString(R.string.static_maps_api_key);
+//        result = Constants.STATIC_MAPS_URL +
+//                Constants.STATIC_MAPS_MARKER + latLng.longitude + Constants.STATIC_MAPS_COMMA + latLng.latitude + Constants.STATIC_MAPS_PARENTHESES + result + Constants.STATIC_MAPS_SCALE + getResources().getString(R.string.static_maps_api_key);
 
         Log.i(TAG, "Static maps url: " + result);
         return result;

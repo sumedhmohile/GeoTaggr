@@ -1,4 +1,4 @@
-package com.sumedh.geotaggr;
+package com.sumedh.geotaggr.database;
 
 import android.content.Context;
 

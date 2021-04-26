@@ -36,12 +36,12 @@
             android:value="default_notification_channel_id" />
 
         <receiver
-            android:name=".GeofenceBroadcastListener"
+            android:name=".broadcastlisteners.GeofenceBroadcastListener"
             android:enabled="true"
             android:exported="true" />
 
         <service
-            android:name=".MessagingService"
+            android:name=".services.MessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

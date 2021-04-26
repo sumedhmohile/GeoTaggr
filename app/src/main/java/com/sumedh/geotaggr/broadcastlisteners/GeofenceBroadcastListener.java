@@ -1,4 +1,4 @@
-package com.sumedh.geotaggr;
+package com.sumedh.geotaggr.broadcastlisteners;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -9,6 +9,9 @@ import android.util.Log;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofenceStatusCodes;
 import com.google.android.gms.location.GeofencingEvent;
+import com.sumedh.geotaggr.domain.Constants;
+import com.sumedh.geotaggr.R;
+import com.sumedh.geotaggr.database.TagDatabase;
 import com.sumedh.geotaggr.activities.SplashScreenActivity;
 import com.sumedh.geotaggr.domain.Tag;
 

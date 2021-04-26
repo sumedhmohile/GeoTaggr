@@ -1,4 +1,4 @@
-package com.sumedh.geotaggr;
+package com.sumedh.geotaggr.domain;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -24,7 +24,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.sumedh.geotaggr.domain.Tag;
+import com.sumedh.geotaggr.R;
+import com.sumedh.geotaggr.broadcastlisteners.GeofenceBroadcastListener;
+import com.sumedh.geotaggr.database.TagDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
